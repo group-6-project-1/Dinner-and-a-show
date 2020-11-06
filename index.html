@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>What's Happening?</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -15,10 +14,10 @@
 
 <div class="columns">
 <div class="column is-11 is-offset-1">
-        <label class="label">what to do?</label>
+        <label class="label city-input">what to do?</label>
             <div class="control button">
-                <input class="input is-primary" id="" type="text" placeholder="Search city...">
-                <button class="button is-primary" id="" >Search</button>
+                <input class="input is-primary" id="cityName" type="text" placeholder="Search city...">
+                <button class="button is-primary" id="cityNameInput">Search</button>
             </div>
         </div>
     </div>
@@ -45,4 +44,9 @@
     </div>
 </div>
 </div>
+
+</body>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://www.eventbriteapi.com/v3/users/me/?token=X5QLAUR2EJUE5JM7JGSU"></script>
  

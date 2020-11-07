@@ -1,0 +1,32 @@
+/* 
+Adjust frame wire to reflect webdesign 
+
+/* importing google fonts https://developers.google.com/fonts/docs/getting_started  */
+@import "https://fonts.googleapis.com/css?family=Rancho&effect=fire-animation";
+
+body {
+    padding: 0, 25px;
+  }
+
+h1 {
+    font-family: Rancho;
+    font-size: 60px;
+    text-align: center;
+    background-image:url("https://miro.medium.com/max/768/1*S-eCEF0XS4J6TZW9NqJyIQ.jpeg");
+    background-size: 100vw 100vh;
+}
+
+h2 {
+  font-family: Rancho;
+  font-size: 60px;
+  margin: 40px 0;
+  text-align: left;
+  padding:25px 50px 0px 100px;;
+}
+.controlBtn, .input{ \
+    padding: 0%;
+}
+
+.input{
+    width: auto;
+}

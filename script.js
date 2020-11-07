@@ -1,8 +1,8 @@
 //calling Eventbrite AJAX
 
 var settings = {
-"async" : true,
-"crossDomain": true,
+//"async" : true,
+//"crossDomain": true,
 "url": "https://www.eventbriteapi.com/v3/events/49216045517/",
 "method": "GET",
 "headers": {
@@ -12,6 +12,6 @@ var settings = {
     }
 }
 
-$.ajax(settings).done(function (response) {
+$.ajax(settings).then(function (response) {
     console.log(response)
 });

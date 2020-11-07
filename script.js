@@ -21,6 +21,16 @@ var mtmkey = "632udEzgNJHjhAfjCkijJGTozG4A5fP3";
 
 //example listing
 
+
+//ONCLICK
+$("#cityNameInput").on("click", function(){
+  var cityname  = $("#cityName").val()
+  console.log(cityname)
+  //RUN FUNCTION TO GET EVENTS HERE
+})
+
+
+
 var page = 0;
 
 function getEvents(page) {

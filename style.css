@@ -30,3 +30,7 @@ h2 {
 .input{
     width: auto;
 }
+
+#attraction-panel {
+  display:none;
+}

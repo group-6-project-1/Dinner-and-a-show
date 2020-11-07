@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="https://i.pinimg.com/originals/ff/52/27/ff522703999cf84a5fe72839a3bd601c.jpg">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <link rel="stylesheet" href=style.css>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 </head>
 
 <body>
@@ -27,24 +28,65 @@
 </div>
 
 
+<!---example event listing-->
+
 <div class="container">
-    <div class="columns">
-      <div class="column block item" id="concerts">
-         Live Music      
-      </div>go
-      <div class="column block item" id="food">
-        Dine In/Dine Out?
+  <div class="row">
+    <div class="col-xs-6">
+    <div id='events-panel' class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Events</h3>
       </div>
+      <div class="panel-body">
+        <div id="events" class="list-group">
+          <a href="#" class="list-group-item">
+            <h4 class="list-group-item-heading">Event title</h4>
+            <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p class="venue"></p>
+          </a>
+          <a href="#" class="list-group-item">
+            <h4 class="list-group-item-heading">Event title</h4>
+            <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p class="venue"></p>
+          </a>
+          <a href="#" class="list-group-item">
+            <h4 class="list-group-item-heading">Event title</h4>
+            <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p class="venue"></p>
+          </a>
+          <a href="#" class="list-group-item">
+            <h4 class="list-group-item-heading">Event title</h4>
+            <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <p class="venue"></p>
+          </a>
+        </div>
       </div>
-    <div class="columns">
-      <div class="column block item" id="movies">
-        Movies
+      <div class="panel-footer">
+        <nav>
+          <ul class="pager">
+            <li id="prev" class="previous"><a href="#"><span aria-hidden="true">&larr;</span></a></li>
+            <li id="next" class="next"><a href="#"><span aria-hidden="true">&rarr;</span></a></li>
+          </ul>
+        </nav>
       </div>
-      <div class="column block item" id="events">
-        Events
     </div>
+    
+    <div id='attraction-panel' class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Attraction</h3>
+      </div>
+      <div id="attraction" class="panel-body">
+        <h4 class="list-group-item-heading">Attraction title</h4>
+        <img class="col-xs-12" src="">
+        <p id="classification"></p>
+      </div>
+    </div>
+    </div>
+  </div>
 </div>
-</div>
+
+
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="script.js"></script>

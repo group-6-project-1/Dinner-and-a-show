@@ -1,12 +1,23 @@
-# project-1
-placeholder description for project-1
+# Project-1
+Stuck inside? Bored? Quarantine got you down? 
+"What's Happenin" is an app designed for our current lifestyle of seeking events, food and entertainment in the comfort of your own home. Enter your city and it will display an upcoming listing of virtual and in-person events, as well as the top restaurants delivering in your area. 
 
-# CSS Framework 
-- Bulma
+# Technologies Used
+-Bulma was used as an alternative third party replacement for Bootstrap
+-Ticketmaster API
+-Zomato API
+-Google Fonts
 
-# API's Used
-Event brite
 
+# User Story 
+As a person spending more time at home during the pandemic, I would like a way to look up events and food options going on immediately in my area.
 
-# Story 
-Stuck inside? Bored? Quarntine really getting to you?
+# Screencaps
+
+# Deployed Website
+https://group-6-project-1.github.io/Whats-Happenin/
+
+# Team member contributions
+
+Wendi Freeman- 
+Development and brainstorming of idea, research into various API's, code for initial AJAX call and getting data to the page, organization of GitHub and deploying page, writing ReadMe, general emotional support. 

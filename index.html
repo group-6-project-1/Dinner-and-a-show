@@ -6,90 +6,65 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>What's Happenin?</title>
     <link rel="shortcut icon" href="https://i.pinimg.com/originals/ff/52/27/ff522703999cf84a5fe72839a3bd601c.jpg">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <link rel="stylesheet" href=style.css>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 </head>
 
 <body>
+  <body>
 
-  <h1 class="font-effect-fire-animation">What's Happenin?</h1> 
-  <h2 class="title">Search by city</h2>
-
-<div class="columns">
-<div class="column is-11 is-offset-1">
-        <label class="label city-input"></label>
-            <div class="controlBtn">
-                <input class="input is-danger" id="cityName" type="text" placeholder="Search city...">
-                <button class="button is-danger" id="cityNameInput">Search</button>
-            </div>
+    <div class="container">
+     <div class="row">
+      <div class="col">
+       <div class="feedback text-center">Search Your City</div>
+       <form id="searchForm" class="my-4">
+        <!-- form group -->
+   
+        <!-- end of form group -->
+   
+        <!-- input group -->
+        <div class="input-group">
+         <input type="text" class="form-control" id="searchCity" placeholder="search city...">
+         <div class="input-group-append">
+          <button type="submit" class="btn redBtn text-capitalize">search</button>
+         </div>
         </div>
+        <!-- input group -->
+   
+   
+       </form>
+   
+      </div>
+     </div>
     </div>
-</div>
 
 
-<!---example event listing-->
-
-<div class="container">
-  <div class="row">
-    <div class="col-xs-6">
-    <div id='events-panel' class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title">Events</h3>
+    <h2>The Show</h2>
+    <section class="py-5">
+      <div class="container">
+        <div class="row" id="event-list"></div>
       </div>
-      <div class="panel-body">
-        <div id="events" class="list-group">
-          <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Event title</h4>
-            <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <p class="venue"></p>
-          </a>
-          <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Event title</h4>
-            <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <p class="venue"></p>
-          </a>
-          <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Event title</h4>
-            <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <p class="venue"></p>
-          </a>
-          <a href="#" class="list-group-item">
-            <h4 class="list-group-item-heading">Event title</h4>
-            <p class="list-group-item-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            <p class="venue"></p>
-          </a>
-        </div>
-      </div>
-      <div class="panel-footer">
-        <nav>
-          <ul class="pager">
-            <li id="prev" class="previous"><a href="#"><span aria-hidden="true">&larr;</span></a></li>
-            <li id="next" class="next"><a href="#"><span aria-hidden="true">&rarr;</span></a></li>
-          </ul>
-        </nav>
-      </div>
-    </div>
-    
-    <div id='attraction-panel' class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title">Attraction</h3>
-      </div>
-      <div id="attraction" class="panel-body">
-        <h4 class="list-group-item-heading">Attraction title</h4>
-        <img class="col-xs-12" src="">
-        <p id="classification"></p>
-      </div>
-    </div>
-    </div>
-  </div>
-</div>
+    </section>
+   
+   
+   
+  <h2>Dinner: Presented by Zomato.</h2>
+    <section class="py-5">
+     <div class="container">
+      <div class="row" id="restaurant-list">
+       <!-- item -->
+   
+         </div>
+    </section>
 
 
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="script2.js"></script>
 <script src="script.js"></script>
 
 </body>
-

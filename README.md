@@ -22,3 +22,6 @@ https://group-6-project-1.github.io/Dinner-and-a-show/
 
 Wendi Freeman- 
 Development and brainstorming of idea, research into various API's, code for initial AJAX call and getting data to the page, organization of GitHub and deploying page, writing ReadMe, general emotional support. 
+
+Tim Hackel-
+Built framework for the basic HTML to build containers. Used the zomato API to pull resturants by seraching for cities. To search by city I had to create a loop of cityID's to correlate with the correct search. Bulma css was not working as a grid for my work, I moved to materialize and I was able to get what I needed. Learned CONST & Class to help compelte the project with help from my tutor Phil.  

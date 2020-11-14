@@ -1,48 +1,39 @@
-
 //Zomato api key
 //b9560497b1bfd6207f3bcdd820336297
-
-// create zomato clas, and pull API with 
+// create zomato clas, and pull API with to gather API data. Making a template capture the xomato API which will show up on the HTML
+// Throwgin data and funcitons into an object. (Zomato.) Function to construct.
 class Zomato {
+	//declaring "function" by defintion called constructor
 	constructor() {
-
 		// adding in API to javascipt, new object for the page
 		this.api = "b9560497b1bfd6207f3bcdd820336297";
-		//pulling headers from API page to gather data from API.
+		//pulling headers from API page to gather data from API. this. is refrerncing the API
 		this.header = {
 			method: 'GET',
 			headers: {
 				'user-key': this.api,
 				'Content-Type': 'application/json'
 			},
-			credentials: 'same-origin'
 		}
 	}
 
-
-	// search api for city and city to be able to return resturants
+	// search api for city (Zomato API) and city to be able to return resturants
+	//creating funciton searchAPI to handle promises
 	async searchAPI(city) {
-
-		const cityURL = `https://developers.zomato.com/api/v2.1/cities?q=${city}
-		`
-
-		//search city
+		const cityURL = `https://developers.zomato.com/api/v2.1/cities?q=${city}`
+		//search city, fetching cityURL
 		const cityInfo = await fetch(cityURL, this.header);
-			console.log(cityInfo);
+			//console.log(cityInfo);
 		const cityJSON = await cityInfo.json()
-
-					// goes through API to locate city suggestion based of search
-		const cityLocation = await cityJSON.location_suggestions;
-		 
+		// goes through API to locate city suggestion based of search
+		const cityLocation = await cityJSON.location_suggestions; 
 		// loop to grab cityid with city search
 		let cityID = 0
 		if(cityLocation.length !== 0) {
 			cityID = await cityLocation[0].id
 		}
-
-		//search restaurant in zomato API to find results
-		const restaurantURL = `https://developers.zomato.com/api/v2.1/search?entity_id=${cityID}&entity_type=city
-		`
+		//search restaurant in zomato API to find results, construct zomato URL for page restuaurant.
+		const restaurantURL = `https://developers.zomato.com/api/v2.1/search?entity_id=${cityID}&entity_type=city`
 		const restaurantInfo = await fetch(restaurantURL, this.header)
 		const restaurantJSON = await restaurantInfo.json()
 		const restaurants = await restaurantJSON.restaurants
@@ -57,8 +48,6 @@ class Zomato {
 }
 class Tvmaze{
     constructor (){
-     
-
     }
 
     searchAPI(restaurant){
@@ -73,7 +62,6 @@ class Tvmaze{
 		
 	}
 
-
      TVSuccess(data){
 			console.log("show data:",data);
 
@@ -82,13 +70,11 @@ class Tvmaze{
 // // insert dive to the page where resturant page will be loaded
 		div.innerHTML = `
 			
-			 
 					<img src="${data.image.medium }" class="is-fullwidth" alt="">
-		 
 					<h6 class="text-uppercase pt-2 redText">${data.name}</h6>
 					<p>${data.summary.substring(0,150)+"...<a href="+data.url+">read more</a>"}</p>
 				 
-			  
+  
 			 
 		`
  	    document.getElementById("show-info").appendChild(div)
@@ -103,7 +89,7 @@ class Tvmaze{
 }
 
 // creating the user interface for the entire div and feedback 
-class UI {
+class Restaurants {
 	constructor() {
 		this.restaurantList = document.querySelector('#restaurant-list')
 	}
@@ -134,7 +120,7 @@ class UI {
 			restaurants.forEach(restaurant => {
 
 				const { thumb:img, name, location:{address},menu_url,url , cuisines} = restaurant.restaurant;
-
+					// to display four resturants on the screen with a loop.
 				if(img !== '' && i++<4) {
 					this.showRestaurant(img, name, address,menu_url,url )
 					//commas in the cuisine list caused error. use split to remove comma
@@ -149,23 +135,18 @@ class UI {
 	showRestaurant(img, name, address, menu_url,url) {
 		const div = document.createElement('div');
 		div.setAttribute('class','col s3');
-	// insert dive to the page where resturant page will be loaded
+	// insert div to the page where resturant page will be loaded
 		div.innerHTML = `
 			
 			 
 					<img src="${img}" class="is-fullwidth" alt="">
-		 
 					<h6 class="text-uppercase pt-2 redText">${name}</h6>
 					<p>${address}</p>
-				 
-			 
-					<a href="${menu_url}" target="_blank" class="btn redBtn  text-uppercase"><i class="fas fa-book"></i>Menu</a>
-			 
-					<a href="${url}" target="_blank" class="btn redBtn  text-uppercase"><i class="fas fa-book"></i>Zomato Page</a>
-			 
-		 
+					<a href="${menu_url}" target="_blank" class="btn text-uppercase"><i class="fas fa-book"></i>Menu</a>
+					<a href="${url}" target="_blank" class="btn text-uppercase"><i class="fas fa-book"></i>Zomato Page</a> 
 			 
 		`
+		//appending the resturant-list div to the page
 		this.restaurantList.appendChild(div)
 	}
 	
@@ -177,7 +158,7 @@ class UI {
 	const searchForm = document.getElementById('searchForm')
 	const searchCity = document.getElementById('searchCity')
 	const zomato = new Zomato()
-	const ui = new UI()
+	const rest = new Restaurants()
 	const tv = new Tvmaze()
 
 	//using the submit button to gather city
@@ -195,16 +176,16 @@ class UI {
 					// console.log(data.cityID)
 					zomato.searchAPI(cityValue)
 					.then(data => {
-						ui.getRestaurants(data.restaurants)
+						rest.getRestaurants(data.restaurants)
 
 					//	tv.searchAPI(data.restaurants[0])
 					})
 				} else {
-					ui.showFeedback('Please enter a valid city')
+					rest.showFeedback('Please enter a valid city')
 				}
 			})
 		} else {
-			ui.showFeedback('please enter a city')
+			rest.showFeedback('please enter a city')
 		}
 	})
 

@@ -2,7 +2,7 @@
 Adjust frame wire to reflect webdesign 
 
 /* importing google fonts https://developers.google.com/fonts/docs/getting_started  */
-@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre&display=swap')
+@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre&display=swap');
 
 body {
     padding: 0, 25px;

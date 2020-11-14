@@ -61,24 +61,45 @@ class Tvmaze{
 
     }
 
-    searchAPI (restaurant){
-		console.log("restaurant cuisines",restaurant)
-		var show = restaurant.restaurant.cuisines.split(', ')[0]        
+    searchAPI(restaurant){
+		  console.log("restaurant ",restaurant)
+		// var show = restaurant.restaurant.cuisines.split(', ')[0] 
+		// console.log( restaurant.restaurant.cuisines.split(', '))       
         $.ajax({
-            url: 'https://api.tvmaze.com/singlesearch/shows?q='+ show, 
+            url: 'https://api.tvmaze.com/singlesearch/shows?q='+ restaurant, 
             type: "GET",
-            dataType: "json",
-            success: TVSuccess   
-        });
-        function TVSuccess(data){
-			console.log(data);
-			$("#show-info").empty();
-            $("#show-info").append('<h3>' + show + '</h3>');
-            $("#show-info").append('<p>' + data.summary + '</p>');
-            $("#show-info").append('<img src= " '+ data.image.medium + ' " />')
+             
+		}).then(this.TVSuccess)
+		
+	}
+
+
+     TVSuccess(data){
+			console.log("show data:",data);
+
+		const div = document.createElement('div');
+ 		div.setAttribute('class','col s3');
+// // insert dive to the page where resturant page will be loaded
+		div.innerHTML = `
+			
+			 
+					<img src="${data.image.medium }" class="is-fullwidth" alt="">
+		 
+					<h6 class="text-uppercase pt-2 redText">${data.name}</h6>
+					<p>${data.summary.substring(0,150)+"...<a href="+data.url+">read more</a>"}</p>
+				 
+			  
+			 
+		`
+ 	    document.getElementById("show-info").appendChild(div)
+
+		
+            // $("#show-info").append('<h3>' + data.name + '</h3>');
+            // $("#show-info").append('<p>' + data.summary + '</p>');
+            // $("#show-info").append('<img src= " '+ data.image.medium + ' " />')
         };
         
-    }
+    
 }
 
 // creating the user interface for the entire div and feedback 
@@ -100,7 +121,8 @@ class UI {
 // get resturants from the api, llok up their menu, zomato site, address
 
 	getRestaurants(restaurants) {
-
+		const tv = new Tvmaze()
+		$("#show-info").empty();
 		// results if no ciy exist exsist
 		if(restaurants.length === 0) {
 			this.showFeedback('no city/check spelling')
@@ -111,10 +133,12 @@ class UI {
 			this.restaurantList.innerHTML = '';
 			restaurants.forEach(restaurant => {
 
-				const { thumb:img, name, location:{address},menu_url,url } = restaurant.restaurant;
+				const { thumb:img, name, location:{address},menu_url,url , cuisines} = restaurant.restaurant;
 
 				if(img !== '' && i++<4) {
 					this.showRestaurant(img, name, address,menu_url,url )
+					//commas in the cuisine list caused error. use split to remove comma
+					tv.searchAPI(cuisines.split(",")[0])     
 				}
 			})
 		}
@@ -165,7 +189,7 @@ class UI {
 
 		if(cityValue != '') {
 			//logic goes if populated value is true
-			zomato.searchAPI(cityValue)
+	   	zomato.searchAPI(cityValue)
 			.then(data => {
 				if(data.cityID !== 0) {
 					// console.log(data.cityID)
@@ -173,7 +197,7 @@ class UI {
 					.then(data => {
 						ui.getRestaurants(data.restaurants)
 
-						tv.searchAPI(data.restaurants[0])
+					//	tv.searchAPI(data.restaurants[0])
 					})
 				} else {
 					ui.showFeedback('Please enter a valid city')

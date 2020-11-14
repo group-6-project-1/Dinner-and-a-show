@@ -46,7 +46,7 @@ class Zomato {
 		const restaurantInfo = await fetch(restaurantURL, this.header)
 		const restaurantJSON = await restaurantInfo.json()
 		const restaurants = await restaurantJSON.restaurants
-
+		console.log("checking response",restaurants)
 		//return matched city with cityID & resturants.
 		return {
 			cityID,
@@ -55,7 +55,31 @@ class Zomato {
 		}
 	}
 }
+class Tvmaze{
+    constructor (){
+     
 
+    }
+
+    searchAPI (restaurant){
+		console.log("restaurant cuisines",restaurant)
+		var show = restaurant.restaurant.cuisines.split(', ')[0]        
+        $.ajax({
+            url: 'https://api.tvmaze.com/singlesearch/shows?q='+ show, 
+            type: "GET",
+            dataType: "json",
+            success: TVSuccess   
+        });
+        function TVSuccess(data){
+			console.log(data);
+			$("#show-info").empty();
+            $("#show-info").append('<h3>' + show + '</h3>');
+            $("#show-info").append('<p>' + data.summary + '</p>');
+            $("#show-info").append('<img src= " '+ data.image.medium + ' " />')
+        };
+        
+    }
+}
 
 // creating the user interface for the entire div and feedback 
 class UI {
@@ -120,6 +144,7 @@ class UI {
 		`
 		this.restaurantList.appendChild(div)
 	}
+	
 }
 
 
@@ -129,6 +154,7 @@ class UI {
 	const searchCity = document.getElementById('searchCity')
 	const zomato = new Zomato()
 	const ui = new UI()
+	const tv = new Tvmaze()
 
 	//using the submit button to gather city
 	searchForm.addEventListener('submit', e => {
@@ -146,6 +172,8 @@ class UI {
 					zomato.searchAPI(cityValue)
 					.then(data => {
 						ui.getRestaurants(data.restaurants)
+
+						tv.searchAPI(data.restaurants[0])
 					})
 				} else {
 					ui.showFeedback('Please enter a valid city')

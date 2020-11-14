@@ -2,31 +2,37 @@
 Adjust frame wire to reflect webdesign 
 
 /* importing google fonts https://developers.google.com/fonts/docs/getting_started  */
-@import "https://fonts.googleapis.com/css?family=Rancho&effect=fire-animation";
+@import url('https://fonts.googleapis.com/css2?family=Frank+Ruhl+Libre&display=swap')
 
 body {
     padding: 0, 25px;
+    font-family: 'Frank Ruhl Libre', serif;
   }
 
 h1 {
-    font-family: Rancho;
-    font-size: 60px;
+    font-size: 30px;
     text-align: center;
-    background-image:url("https://miro.medium.com/max/768/1*S-eCEF0XS4J6TZW9NqJyIQ.jpeg");
+    background-image:url("");
     background-size: 100vw 100vh;
 }
 
 h2 {
-  font-family: Rancho;
-  font-size: 60px;
+  font-size: 15px;
   margin: 40px 0;
-  text-align: left;
-  padding:25px 50px 0px 100px;;
-}
-.controlBtn, .input{ \
-    padding: 0%;
+  text-align: center;
+  padding:5px 50px 0px 100px;;
 }
 
+h3 {
+  font-size: 20px;
+  margin: 40px 0;
+  text-align: center;
+  padding:25px 50px 0px 100px;;
+}
+.btn{
+  
+
+}
 .input{
     width: auto;
 }

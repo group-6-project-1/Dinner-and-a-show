@@ -149,7 +149,7 @@ class UI {
 	showRestaurant(img, name, address, menu_url,url) {
 		const div = document.createElement('div');
 		div.setAttribute('class','col s3');
-// insert dive to the page where resturant page will be loaded
+	// insert dive to the page where resturant page will be loaded
 		div.innerHTML = `
 			
 			 

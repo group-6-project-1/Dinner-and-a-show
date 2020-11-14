@@ -32,3 +32,6 @@ Built framework for the basic HTML to build containers. Used the zomato API to p
 
 Melissa Ward-
 Integrated the free TvMaze API into the Zomatto js.script. The TvMaze API processes the pulled restaurants from the Zomatto API and generates show suggestions based on the cuisine type of the restaurant values of the Zomatto city search. Ensured only the first cusine type was pulled per restauant. Built the initial css framework and made edits to the evolving project structure. 
+
+Danny Tomkins-
+Created organization and git repo. Researched API sources and created ajax calls to test API sources. Revised TVmaze api call to append multiple results to corralate with Zamato results. Made TVmaze results display nicely in a row similar to Zomato results. Created read more feature for elements with too much text.

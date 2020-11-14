@@ -1,145 +1,163 @@
-//calling Eventbrite AJAX
 
-//var settings = {
-//"async" : true,
-//"crossDomain": true,
-//"url": "https://www.eventbriteapi.com/v3/events/49216045517/",
-//"method": "GET",
-//"headers": {
-        //"Authorization": "Token X5QLAUR2EJUE5JM7JGSU",
-        //"Content-Type": "application/json"
-        
-    //}
-//}
-
-//$.ajax(settings).then(function (response) {
-    //console.log(response)
-//});
-
-//calling ticketmaster
 var mtmkey = "632udEzgNJHjhAfjCkijJGTozG4A5fP3";
 
-//example listing
 
-$("#cityNameInput").on("click", function(){
-  var cityname  = $("#cityName").val()
-  console.log(cityname)
-  //RUN FUNCTION TO GET
-  $.ajax({
-    type:"GET",
-    url:"https://app.ticketmaster.com/discovery/v2/events.json?size=4&apikey=BhMvYIfbB1Llvb7OFXptbGScIMvH3jNz",
-    async:true,
-    dataType: "json",
-    success: function(json) {
-                console.log(json);
-                //PARSE RESULTS HERE
-                city=cityname
-                // Do other things.
-             },
-    error: function(xhr, status, err) {
-                // This time, we do not end up here!
-             }
-  });
-})
+//Ticketmaster api key
+//632udEzgNJHjhAfjCkijJGTozG4A5fP3
+
+// create Ticketmaster class, and pull API with 
+class Zomato {
+	constructor() {
+
+		// adding in API to javascipt, new object for the page
+		this.api = "b9560497b1bfd6207f3bcdd820336297";
+		//pulling headers from API page to gather data from API.
+		this.header = {
+			method: 'GET',
+			headers: {
+				'user-key': this.api,
+				'Content-Type': 'application/json'
+			},
+			credentials: 'same-origin'
+		}
+	}
 
 
+	// search api for city and city to be able to return resturants
+	async searchAPI(city) {
 
-// var page = 0;
+		const cityURL = `https://developers.zomato.com/api/v2.1/cities?q=${city}
+		`
 
-// function getEvents(page) {
+		//search city
+		const cityInfo = await fetch(cityURL, this.header);
+			console.log(cityInfo);
+		const cityJSON = await cityInfo.json()
 
-//   $('#events-panel').show();
-//   $('#attraction-panel').hide();
+					// goes through API to locate city suggestion based of search
+		const cityLocation = await cityJSON.location_suggestions;
+		 
+		// loop to grab cityid with city search
+		let cityID = 0
+		if(cityLocation.length !== 0) {
+			cityID = await cityLocation[0].id
+		}
 
-//   if (page < 0) {
-//     page = 0;
-//     return;
-//   }
-//   if (page > 0) {
-//     if (page > getEvents.json.page.totalPages-1) {
-//       page=0;
-//     }
-//   }
-  
+		//search restaurant in zomato API to find results
+		const restaurantURL = `https://developers.zomato.com/api/v2.1/search?entity_id=${cityID}&entity_type=city
+		`
+		const restaurantInfo = await fetch(restaurantURL, this.header)
+		const restaurantJSON = await restaurantInfo.json()
+		const restaurants = await restaurantJSON.restaurants
 
-  
+		//return matched city with cityID & resturants.
+		return {
+			cityID,
+				// console.log(cityID);
+			restaurants
+		}
+	}
+}
 
-//   $.ajax({
-//     type:"GET",
-//     url:"https://app.ticketmaster.com/discovery/v2/events.json?apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG&size=4&page="+page,
-//     async:true,
-//     dataType: "json",
-//     success: function(json) {
-//           getEvents.json = json;
-//   			  showEvents(json);
-//   		   },
-//     error: function(xhr, status, err) {
-//   			  console.log(err);
-//   		   }
-//   });
-// }
 
-// function showEvents(json) {
-//   var items = $('#events .list-group-item');
-//   items.hide();
-//   var events = json._embedded.events;
-//   var item = items.first();
-//   for (var i=0;i<events.length;i++) {
-//     item.children('.list-group-item-heading').text(events[i].name);
-//     item.children('.list-group-item-text').text(events[i].dates.start.localDate);
-//     try {
-//       item.children('.venue').text(events[i]._embedded.venues[0].name + " in " + events[i]._embedded.venues[0].city.name);
-//     } catch (err) {
-//       console.log(err);
-//     }
-//     item.show();
-//     item.off("click");
-//     item.click(events[i], function(eventObject) {
-//       console.log(eventObject.data);
-//       try {
-//         getAttraction(eventObject.data._embedded.attractions[0].id);
-//       } catch (err) {
-//       console.log(err);
-//       }
-//     });
-//     item=item.next();
-//   }
-// }
+// creating the user interface for the entire div and feedback 
+class UI {
+	constructor() {
+		this.restaurantList = document.querySelector('#restaurant-list')
+	}
 
-// $('#prev').click(function() {
-//   getEvents(--page);
-// });
+// creating results on if a city was found or if not found in the data base
+	showFeedback(text) {
+		const feedback = document.querySelector('.feedback');
+		feedback.classList.add('showItem')
+		feedback.innerHTML =`
+			<p>${text}</p>
+		`;
+		
+	}
 
-// $('#next').click(function() {
-//   getEvents(++page);
-// });
+// get resturants from the api, llok up their menu, zomato site, address
 
-// function getAttraction(id) {
-//   $.ajax({
-//     type:"GET",
-//     url:"https://app.ticketmaster.com/discovery/v2/attractions/"+id+".json?apikey=5QGCEXAsJowiCI4n1uAwMlCGAcSNAEmG",
-//     async:true,
-//     dataType: "json",
-//     success: function(json) {
-//           showAttraction(json);
-//   		   },
-//     error: function(xhr, status, err) {
-//   			  console.log(err);
-//   		   }
-//   });
-// }
+	getRestaurants(restaurants) {
 
-// function showAttraction(json) {
-//   $('#events-panel').hide();
-//   $('#attraction-panel').show();
-  
-//   $('#attraction-panel').click(function() {
-//     getEvents(page);
-//   });
-  
-//   $('#attraction .list-group-item-heading').first().text(json.name);
-//   $('#attraction img').first().attr('src',json.images[0].url);
-//   $('#classification').text(json.classifications[0].segment.name + " - " + json.classifications[0].genre.name + " - " + json.classifications[0].subGenre.name);
-// }
+		// results if no ciy exist exsist
+		if(restaurants.length === 0) {
+			this.showFeedback('no city/check spelling')
 
-// getEvents(page);
+			// if city does exist, insert the innerhtml doc that includes, img, name, address, menu_url
+		} else {
+			 var i = 0 
+			this.restaurantList.innerHTML = '';
+			restaurants.forEach(restaurant => {
+
+				const { thumb:img, name, location:{address},menu_url,url } = restaurant.restaurant;
+
+				if(img !== '' && i++<4) {
+					this.showRestaurant(img, name, address,menu_url,url )
+				}
+			})
+		}
+	}
+
+
+	//display the resturant on the screen by creating a div to insert through the web api
+	showRestaurant(img, name, address, menu_url,url) {
+		const div = document.createElement('div');
+		div.setAttribute('class','col s3');
+// insert dive to the page where resturant page will be loaded
+		div.innerHTML = `
+			
+			 
+					<img src="${img}" class="is-fullwidth" alt="">
+		 
+					<h6 class="text-uppercase pt-2 redText">${name}</h6>
+					<p>${address}</p>
+				 
+			 
+					<a href="${menu_url}" target="_blank" class="btn redBtn  text-uppercase"><i class="fas fa-book"></i>Menu</a>
+			 
+					<a href="${url}" target="_blank" class="btn redBtn  text-uppercase"><i class="fas fa-book"></i>Zomato Page</a>
+			 
+		 
+			 
+		`
+		this.restaurantList.appendChild(div)
+	}
+}
+
+
+// function to return element on the page and feeback receieved if the no city exisit. 
+(function(){
+	const searchForm = document.getElementById('searchForm')
+	const searchCity = document.getElementById('searchCity')
+	const zomato = new Zomato()
+	const ui = new UI()
+
+	//using the submit button to gather city
+	searchForm.addEventListener('submit', e => {
+		e.preventDefault()
+
+// construct cityValue and also return city serached to lower case
+		const cityValue = searchCity.value.toLowerCase()
+
+		if(cityValue != '') {
+			//logic goes if populated value is true
+			zomato.searchAPI(cityValue)
+			.then(data => {
+				if(data.cityID !== 0) {
+					// console.log(data.cityID)
+					zomato.searchAPI(cityValue)
+					.then(data => {
+						ui.getRestaurants(data.restaurants)
+					})
+				} else {
+					ui.showFeedback('Please enter a valid city')
+				}
+			})
+		} else {
+			ui.showFeedback('please enter a city')
+		}
+	})
+
+
+})()

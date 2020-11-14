@@ -29,3 +29,6 @@ Development and brainstorming of idea, research into various API's, code for ini
 
 Tim Hackel-
 Built framework for the basic HTML to build containers. Used the zomato API to pull resturants by seraching for cities. To search by city I had to create a loop of cityID's to correlate with the correct search. Bulma css was not working as a grid for my work, I moved to materialize and I was able to get what I needed. Learned CONST & Class to help compelte the project with help from my tutor Phil.  
+
+Melissa Ward-
+Integrated the free TvMaze API into the Zomatto js.script. The TvMaze API processes the pulled restaurants from the Zomatto API and generates show suggestions based on the cuisine type of the restaurant values of the Zomatto city search. Ensured only the first cusine type was pulled per restauant. Built the initial css framework and made edits to the evolving project structure. 
